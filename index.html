@@ -1,1 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EngSmart 4.0 Constructor - Cyberpunk Edition</title>
+    <style>
+        :root {
+            --neon-blue: #00f3ff;
+            --neon-pink: #ff00ff;
+            --dark-bg: #0d0d15;
+            --card-bg: rgba(20, 20, 30, 0.9);
+            --user-border: #00f3ff; /* Переменная для пипетки */
+            --user-card: #161625;   /* Переменная для пипетки */
+        }
 
+        body {
+            background-color: var(--dark-bg);
+            color: #fff;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-image: radial-gradient(circle at 50% 50%, #1b1b2f 0%, #0d0d15 100%);
+            min-height: 100vh;
+        }
+
+        /* Новая панель настроек */
+        .cyber-settings {
+            display: flex;
+            gap: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 1px solid var(--neon-blue);
+            align-items: center;
+            font-size: 14px;
+        }
+        
+        .setting-item { display: flex; align-items: center; gap: 8px; }
+        input[type="color"] { border: none; width: 25px; height: 25px; cursor: pointer; background: none; }
+
+        h1 {
+            color: var(--neon-blue);
+            text-shadow: 0 0 15px var(--neon-blue);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 30px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid var(--neon-blue);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .input-group { margin-bottom: 20px; }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 12px;
+            background: var(--user-card);
+            border: 1px solid #333;
+            border-radius: 5px;
+            color: #00f3ff;
+            outline: none;
+            transition: 0.3s;
+            box-sizing: border-box;
+            font-family: monospace;
+        }
+
+        input:focus {
+            border-color: var(--neon-pink);
+            box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid var(--user-border);
+        }
+
+        /* Классы кнопок как в оригинале */
+        .btn {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-generate {
+            background: linear-gradient(45deg, #00f3ff, #0077ff);
+            color: #000;
+            box-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+        }
+
+        .btn-preview {
+            background: transparent;
+            border: 2px solid var(--neon-pink);
+            color: var(--neon-pink);
+        }
+
+        .btn-next {
+            background: #ff00ff;
+            color: #fff;
+            box-shadow: 0 0 15px #ff00ff;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.2);
+        }
+
+        .preview-area {
+            width: 100%;
+            height: 100px;
+            background: #000;
+            margin-top: 15px;
+            border-radius: 5px;
+            border: 1px dashed var(--neon-blue);
+        }
+
+        .neon-glow { box-shadow: 0 0 15px var(--user-border) !important; }
+    </style>
+</head>
+<body>
+
+    <h1>EngSmart 4.0 Constructor</h1>
+
+    <div class="cyber-settings">
+        <div class="setting-item">
+            <label>Рамка:</label>
+            <input type="color" id="colorPickerBorder" value="#00f3ff" oninput="document.documentElement.style.setProperty('--user-border', this.value)">
+        </div>
+        <div class="setting-item">
+            <label>Карточка:</label>
+            <input type="color" id="colorPickerCard" value="#161625" oninput="document.documentElement.style.setProperty('--user-card', this.value)">
+        </div>
+        <div class="setting-item">
+            <input type="checkbox" id="neonToggle" onclick="document.querySelector('.container').classList.toggle('neon-glow')">
+            <label for="neonToggle">Неон</label>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="input-group">
+            <input type="text" placeholder="https://images.unsplash.com/photo-example...">
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <label>Apple</label>
+                <textarea rows="3"></textarea>
+            </div>
+            <div class="card">
+                <label>Яблоко</label>
+                <textarea rows="3"></textarea>
+            </div>
+            <div class="card">
+                <label>Image URLs...</label>
+                <textarea rows="3"></textarea>
+            </div>
+        </div>
+
+        <button class="btn btn-generate">
+            1. GENERATE IFRAME 📝
+        </button>
+
+        <div class="preview-area"></div>
+
+        <button class="btn btn-preview">
+            2. PREVIEW HERE 👁️
+        </button>
+
+        <button class="btn btn-next">
+            Next ➔
+        </button>
+    </div>
+
+</body>
+</html>
